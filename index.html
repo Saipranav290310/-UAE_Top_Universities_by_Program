@@ -4,24 +4,247 @@
   <meta charset="UTF-8">
   <title>UAE College Guide – Programs & Universities</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    body { margin:0; background:#121212; color:#fff; font-family:'Comic Neue', cursive; }
-    .container { max-width:1100px; margin:2rem auto; padding:1.5rem; background:#1e1e1e; border-radius:8px; }
-    h1 { text-align:center; color:#00c9ff; }
-    input { width:100%; padding:0.75rem; margin:1rem 0; border:none; border-radius:6px;
-            background:#2a2a2a; color:#fff; }
-    table { width:100%; border-collapse:collapse; margin-bottom:2rem; }
-    th, td { padding:10px; border:1px solid #444; text-align:left; }
-    th { background:#2d2d2d; color:#00c9ff; }
-    tr:nth-child(even){ background:#2a2a2a; }
-    tr:hover{ background:#333; }
+    /* Researched Color Palette and Style Variables from AI Career Guide */
+    :root {
+      /* Dark Mode Palette */
+      --bg-dark: #0f172a;          /* Rich, deep blue background */
+      --surface-dark: #1e293b;    /* Slightly lighter surface for cards, nav */
+      --text-dark: #cbd5e1;       /* Soft, off-white text for readability */
+      --primary-dark: #00e0ff;     /* Bright cyan for active elements */
+      --secondary-dark: #9333ea;   /* Vibrant purple for secondary accents */
+      --accent-dark: #00ff9d;      /* Bright green for hover/call-to-action */
+
+      /* Light Mode Palette */
+      --bg-light: #f8fafc;         /* Clean, almost white background */
+      --surface-light: #ffffff;   /* Pure white for cards, nav */
+      --text-light: #0f172a;       /* Dark blue text for strong contrast */
+      --primary-light: #0066cc;    /* Professional, classic blue */
+      --secondary-light: #7c3aed;  /* Rich purple for light mode */
+      --accent-light: #00a86b;     /* Strong, accessible green */
+
+      /* Global Style Properties */
+      --border-radius: 8px;
+      --transition-speed: 0.3s;
+      --shadow-primary: 0 4px 15px rgba(0,0,0,0.4); /* Crisp, professional shadow */
+    }
+
+    /* Base Styles - Aligned with AI Career Guide */
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Light Mode Overrides */
+    .light-mode {
+      --bg-dark: var(--bg-light);
+      --surface-dark: var(--surface-light);
+      --text-dark: var(--text-light);
+      --primary-dark: var(--primary-light);
+      --secondary-dark: var(--secondary-light);
+      --accent-dark: var(--accent-light);
+    }
+    
+    .light-mode .header {
+      background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
+    }
+    .light-mode .theme-toggle {
+      background: rgba(0, 0, 0, 0.1);
+      color: var(--text-light);
+    }
+    .light-mode .theme-toggle:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    .light-mode .content-area h2 {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    .light-mode .form-control {
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+    .light-mode table th {
+      background: var(--surface-light); /* Lighter background for table headers */
+    }
+    .light-mode table tr:nth-child(even){ 
+      background: rgba(0, 0, 0, 0.03); /* Very light stripe */
+    }
+    .light-mode table tr:hover{ 
+      background: rgba(0, 0, 0, 0.08); /* Slightly darker hover */
+    }
+
+
+    /* Header - Aligned with AI Career Guide */
+    .header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--secondary-dark));
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 600;
+      font-size: 2rem;
+      margin: 0;
+      color: white; /* Always white on header gradient */
+      letter-spacing: 1px;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: none;
+      border-radius: var(--border-radius);
+      padding: 0.5rem 1rem;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition-speed);
+      backdrop-filter: blur(5px);
+    }
+
+    .theme-toggle:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Content Area - Aligned with AI Career Guide's main content */
+    .content-area {
+      flex: 1; /* Allows content to grow and push footer down */
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: var(--surface-dark);
+      border-radius: var(--border-radius);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      box-sizing: border-box;
+    }
+    
+    .content-area h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--secondary-dark); /* Using secondary accent for section titles */
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 0.5rem;
+      margin-top: 2rem; /* Add space between sections */
+      margin-bottom: 1.5rem;
+    }
+    .content-area h2:first-of-type {
+        margin-top: 0; /* No top margin for the very first h2 */
+    }
+
+    /* Input Styling - Aligned with AI Career Guide's form-control */
+    .search-input {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 1rem 0;
+      background-color: var(--surface-dark);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--border-radius);
+      color: var(--text-dark);
+      font-family: 'Roboto', sans-serif;
+      transition: all var(--transition-speed);
+      box-sizing: border-box;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary-dark);
+      box-shadow: 0 0 0 2px rgba(0, 224, 255, 0.3);
+    }
+    /* Placeholder color */
+    .search-input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+    }
+    .light-mode .search-input::placeholder {
+        color: rgba(0, 0, 0, 0.4);
+    }
+
+
+    /* Table Styling - Aligned with AI Career Guide's professional theme */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle table shadow */
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.08); /* Very subtle borders */
+      text-align: left;
+    }
+    th {
+      background: var(--surface-dark); /* Surface dark for headers */
+      color: var(--primary-dark); /* Primary accent for header text */
+      font-weight: 500;
+      font-family: 'Roboto', sans-serif;
+    }
+    tr:nth-child(even){ 
+      background: rgba(0, 0, 0, 0.1); /* Slightly darker stripe */
+    }
+    tr:hover{ 
+      background: rgba(0, 224, 255, 0.05); /* Subtle hover effect with accent */
+    }
+
+    /* Footer - Added for consistency */
+    .footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--text-dark);
+      font-size: 0.875rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: auto; /* Push to bottom */
+    }
+    .light-mode .footer {
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 600px) {
+      .header h1 {
+        font-size: 1.5rem;
+      }
+      .theme-toggle {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+        top: 0.5rem;
+        right: 0.5rem;
+      }
+      .content-area {
+        margin: 1rem auto;
+        padding: 1rem;
+      }
+      .content-area h2 {
+        font-size: 1.5rem;
+      }
+      /* Make tables stack vertically on small screens if possible, or allow scroll */
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+      th, td {
+        min-width: 80px; /* Ensure columns don't collapse too much */
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
+  <header class="header">
     <h1>🎓 UAE Top Universities by Program</h1>
-    <input type="text" id="searchInput" placeholder="Search program, university, stream, % or fee...">
+    <button class="theme-toggle" onclick="toggleTheme()">🌙 / ☀️</button>
+  </header>
+
+  <main class="content-area">
+    <input type="text" id="searchInput" class="search-input" placeholder="Search program, university, stream, % or fee...">
 
     <!-- B.Tech in Computer Science Engineering -->
     <h2>B.Tech in Computer Science Engineering</h2>
@@ -40,6 +263,12 @@
         <tr><td>Higher Colleges of Technology</td><td>Science (Maths)</td><td>~60</td><td>~35,000</td></tr>
         <tr><td>Ajman University</td><td>Science (Maths)</td><td>60‑65</td><td>~37,000</td></tr>
         <tr><td>British University in Dubai</td><td>Science (Maths)</td><td>~65</td><td>~58,000</td></tr>
+        <!-- Added entries for B.Tech CSE -->
+        <tr><td>Canadian University Dubai</td><td>Science (Maths)</td><td>~65</td><td>~55,000</td></tr>
+        <tr><td>University of Wollongong in Dubai</td><td>Science (Maths)</td><td>~70</td><td>~62,000</td></tr>
+        <tr><td>Rochester Institute of Technology - Dubai</td><td>Science (Maths)</td><td>~70</td><td>~85,000</td></tr>
+        <tr><td>Amity University Dubai</td><td>Science (Maths)</td><td>~60</td><td>~40,000</td></tr>
+        <tr><td>Manipal University Dubai</td><td>Science (Maths)</td><td>~60</td><td>~48,000</td></tr>
       </tbody>
     </table>
 
@@ -58,6 +287,12 @@
         <tr><td>Murdoch University Dubai (AI & Autonomous Systems)</td><td>Science (Maths)</td><td>~70</td><td>~45,000</td></tr>
         <tr><td>Middlesex University Dubai</td><td>Science (Maths/CS)</td><td>~75</td><td>~47,000</td></tr>
         <tr><td>Canadian University Dubai</td><td>Science (Maths)</td><td>~70</td><td>~52,000</td></tr>
+        <!-- Added entries for B.Sc AI -->
+        <tr><td>American University in Dubai</td><td>Science (Maths)</td><td>~65</td><td>~80,000</td></tr>
+        <tr><td>University of Dubai</td><td>Science (Maths)</td><td>~65</td><td>~55,000</td></tr>
+        <tr><td>Curtin University Dubai</td><td>Science (Maths)</td><td>~70</td><td>~49,000</td></tr>
+        <tr><td>RIT - Dubai</td><td>Science (Maths)</td><td>~70</td><td>~78,000</td></tr>
+        <tr><td>SP Jain School of Global Management</td><td>Science (Maths)</td><td>~70</td><td>~95,000</td></tr>
       </tbody>
     </table>
 
@@ -76,6 +311,11 @@
         <tr><td>Amity University Dubai</td><td>Any + Portfolio</td><td>~60</td><td>~33,500</td></tr>
         <tr><td>University of Dubai</td><td>Any + Portfolio</td><td>~65</td><td>~45,000</td></tr>
         <tr><td>MOHESR-affiliated College</td><td>Any + Portfolio</td><td>~65</td><td>~50,000</td></tr>
+        <!-- Added entries for B.Arch -->
+        <tr><td>Manipal University Dubai</td><td>Any + Portfolio</td><td>~60</td><td>~42,000</td></tr>
+        <tr><td>Heriot-Watt University Dubai</td><td>Science/Arts</td><td>~65</td><td>~55,000</td></tr>
+        <tr><td>American University in Dubai</td><td>Any + Portfolio</td><td>~70</td><td>~88,000</td></tr>
+        <tr><td>RAK American University</td><td>Any + Portfolio</td><td>~60</td><td>~38,000</td></tr>
       </tbody>
     </table>
 
@@ -94,6 +334,11 @@
         <tr><td>MBRU – Md. Bin Rashid Univ. of Med.</td><td>Science (PCB)</td><td>~90</td><td>~160,000</td></tr>
         <tr><td>UAE University (private medicine seat)</td><td>Science (PCB)</td><td>~85</td><td>~75,000</td></tr>
         <tr><td>Sharjah University (private seat)</td><td>Science (PCB)</td><td>~90</td><td>~120,000</td></tr>
+        <!-- Added entries for MBBS / MD -->
+        <tr><td>Mohammed Bin Rashid Univ. of Med. & Health Sciences</td><td>Science (PCB)</td><td>~90</td><td>~160,000</td></tr>
+        <tr><td>Thumbay University</td><td>Science (PCB)</td><td>~80</td><td>~130,000</td></tr>
+        <tr><td>RAK Medical & Health Sciences University</td><td>Science (PCB)</td><td>~85</td><td>~134,000</td></tr>
+        <tr><td>Dubai Medical College (for boys/co-ed)</td><td>Science (PCB)</td><td>~85</td><td>~125,000</td></tr>
       </tbody>
     </table>
 
@@ -112,14 +357,27 @@
         <tr><td>American University in Dubai</td><td>Science (PCB)</td><td>~70</td><td>~50,000</td></tr>
         <tr><td>Canadian University Dubai</td><td>Science (PCB)</td><td>~65</td><td>~42,000</td></tr>
         <tr><td>University of Dubai</td><td>Science (PCB)</td><td>~65</td><td>~45,000</td></tr>
+        <!-- Added entries for B.Sc Nursing -->
+        <tr><td>RAK Medical & Health Sciences University</td><td>Science (PCB)</td><td>~70</td><td>~48,000</td></tr>
+        <tr><td>Fatima College of Health Sciences</td><td>Science (PCB)</td><td>~65</td><td>~35,000</td></tr>
+        <tr><td>Manipal University Dubai</td><td>Science (PCB)</td><td>~65</td><td>~40,000</td></tr>
       </tbody>
     </table>
-  </div>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 Sai Pranav, 10D - IIS</p>
+  </footer>
 
   <script>
+    // Theme Toggle Function - Copied from AI Career Guide
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+    }
+
     document.getElementById('searchInput').addEventListener('input', function(){
       const q = this.value.toLowerCase();
-      document.querySelectorAll('.container table tbody tr').forEach(r => {
+      document.querySelectorAll('.content-area table tbody tr').forEach(r => {
         r.style.display = r.innerText.toLowerCase().includes(q) ? '' : 'none';
       });
     });
